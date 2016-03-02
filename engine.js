@@ -1,5 +1,5 @@
-import driver from './src/driver';
-import camera from './src/camera';
+import * as driver from './src/driver';
+import * as camera from './src/camera';
 import sleep from './src/sleep';
 import log from './src/log';
 
@@ -29,7 +29,7 @@ process.on('uncaughtException', exitHandler.bind(null, {exit: true}));
 Promise.all(driver.setup(), camera.setup())
   .then(async function() {
 
-    for(var i = 0; i < 10 i++) {
+    for(var i = 0; i < 10; i++) {
       log.debug('capturing!')
       await camera.capture();
       log.debug('waiting for 5 sec')

@@ -1,6 +1,6 @@
 import {Logger, transports} from 'winston';
 
-export default log = new winston.Logger({
+const log = new Logger({
     transports: [
       new transports.Console(
         {
@@ -9,3 +9,5 @@ export default log = new winston.Logger({
         })
     ]
 });
+
+export default log;

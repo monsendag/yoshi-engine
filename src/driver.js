@@ -14,13 +14,13 @@ const steps =
        [0,0,1,1],
        [1,0,0,1]];
 
-const pins = null;
+var pins = null;
 
 // acquire pins
 export function setup() {
   log.debug('configuring driver');
-  const pins = pinNumbers.map(n => new GpioPin(pin));
-  const pinPromises = pins.map(pin => pin.out())
+  const pins = pinNumbers.map(n => new GpioPin(n));
+  const promises = pins.map(pin => pin.out())
   return Promise.all(promises);
 }
 
@@ -37,17 +37,18 @@ function set(states) {
     if(pins == null) {
       throw new Error("Pins have not been aquired yet. Please call setup() first.")
     }
-    promises = pins.map((pin, i) => pin.set(states[i]));
+    const promises = pins.map((pin, i) => pin.set(states[i]));
     return Promise.all(promises);
 }
 
 export async function drive(counter) {
-  while(counter > 0):
+  while(counter > 0) {
       var i = counter % steps.length;
       await set(steps[i]);
       await sleep(3);
       counter -= 1;
+  }
 
-  # turn off all pins
+  // turn off all pins
   await set([0, 0, 0, 0]);
 }
