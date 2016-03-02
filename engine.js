@@ -7,7 +7,6 @@ import log from './src/log';
 process.stdin.resume();
 
 function exitHandler(options, err) {
-    log.info('qutting yoshi-engine...')
     if (options.cleanup) {
       driver.cleanup();
     }
@@ -18,6 +17,7 @@ function exitHandler(options, err) {
 
 // clean up when exiting
 process.on('exit', exitHandler.bind(null, {cleanup: true}));
+
 
 //catches ctrl+c event
 process.on('SIGINT', exitHandler.bind(null, {exit: true}));
@@ -30,11 +30,11 @@ Promise.all(driver.setup(), camera.setup())
   .then(async function() {
 
     for(var i = 0; i < 10; i++) {
-      log.debug('capturing!')
+      log.debug('capturing!');
       await camera.capture();
-      log.debug('waiting for 5 sec')
+      log.debug('waiting for 5 sec');
       await sleep(5000);
-      log.debug('driving 10000 cycles')
+      log.debug('driving 10000 cycles');
       await driver.drive(10000);
     }
 

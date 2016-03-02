@@ -1,5 +1,5 @@
 import test from 'ava';
-import {setup, captureImage} from '../src/camera';
+import {setup, capture} from '../src/camera';
 
 
 test('capture single photo', t => {
