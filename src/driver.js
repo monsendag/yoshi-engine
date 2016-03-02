@@ -1,6 +1,6 @@
-import GpioPin from 'gpio-promise';
 import sleep from './sleep';
 import log from './log';
+import * as gpio from "pi-gpio-promise";
 
 // BOARD numbering system (not BCM)
 // https://sourceforge.net/p/raspberry-gpio-python/wiki/BasicUsage/
@@ -14,30 +14,25 @@ const steps =
        [0,0,1,1],
        [1,0,0,1]];
 
-var pins = null;
-
 // acquire pins
 export function setup() {
   log.debug('configuring driver');
-  const pins = pinNumbers.map(n => new GpioPin(n));
-  const promises = pins.map(pin => pin.out())
+  const promises = pinNumbers.map(n => gpio.open(n, "output"));
   return Promise.all(promises);
 }
 
 // release pins
 export function cleanup() {
   log.debug('releasing gpio pins');
-  const promises = pinNumbers.map(n => GpioPin.unexport(n));
-  return Promise.all(promises).then(() => {
-    pins = null;
-  });
+  const promises = pinNumbers.map(n => gpio.close(n));
+  return Promise.all(promises);
 }
 
 function set(states) {
-    if(pins == null) {
-      throw new Error("Pins have not been aquired yet. Please call setup() first.")
-    }
-    const promises = pins.map((pin, i) => pin.set(states[i]));
+    // if(pins == null) {
+    //   throw new Error("Pins have not been aquired yet. Please call setup() first.");
+    // }
+    const promises = pinNumbers.map((n, i) => gpio.write(n, states[i]));
     return Promise.all(promises);
 }
 
