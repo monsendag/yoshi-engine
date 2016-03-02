@@ -1,17 +1,18 @@
 import driver from './src/driver';
 import camera from './src/camera';
 import sleep from './src/sleep';
+import log from './src/log';
 
 //so the program will not close instantly
 process.stdin.resume();
 
 function exitHandler(options, err) {
+    log.info('qutting yoshi-engine...')
     if (options.cleanup) {
-      console.log("Cleaning up gpio");
       driver.cleanup();
     }
 
-    if (err) console.log(err.stack);
+    if (err) log.error(err.stack);
     if (options.exit) process.exit();
 }
 
@@ -29,8 +30,11 @@ Promise.all(driver.setup(), camera.setup())
   .then(async function() {
 
     for(var i = 0; i < 10 i++) {
+      log.debug('capturing!')
       await camera.capture();
+      log.debug('waiting for 5 sec')
       await sleep(5000);
+      log.debug('driving 10000 cycles')
       await driver.drive(10000);
     }
 

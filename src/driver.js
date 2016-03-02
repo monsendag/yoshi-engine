@@ -1,5 +1,6 @@
 import GpioPin from 'gpio-promise';
 import sleep from './sleep';
+import log from './log';
 
 // BOARD numbering system (not BCM)
 // https://sourceforge.net/p/raspberry-gpio-python/wiki/BasicUsage/
@@ -17,6 +18,7 @@ const pins = null;
 
 // acquire pins
 export function setup() {
+  log.debug('configuring driver');
   const pins = pinNumbers.map(n => new GpioPin(pin));
   const pinPromises = pins.map(pin => pin.out())
   return Promise.all(promises);
@@ -24,6 +26,7 @@ export function setup() {
 
 // release pins
 export function cleanup() {
+  log.debug('releasing gpio pins');
   const promises = pinNumbers.map(n => GpioPin.unexport(n));
   return Promise.all(promises).then(() => {
     pins = null;
