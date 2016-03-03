@@ -34,8 +34,8 @@
   "dependencies": {
     "babel-plugin-transform-async-to-generator": "^6.5.0",
     "execa": "^0.2.2",
-    "pi-gpio-promise": "0.0.2",
     "winston": "^2.2.0",
-    "ws": "^1.0.1"
+    "ws": "^1.0.1",
+    "wiring-pi": "^2.1.1"
   }
 }
