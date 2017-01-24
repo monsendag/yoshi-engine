@@ -1,4 +1,4 @@
-import sleep from '../src/sleep';
+const sleep = require('../src/sleep');
 
 async function doo() {
   console.log('a');

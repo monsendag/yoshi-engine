@@ -1,15 +1,14 @@
 import execa from 'execa';
 import log from './log';
 
-export function setup() {
+exports.setup = function() {
   log.debug('configuring camera');
   return Promise.resolve();
 }
 
-export function capture() {
+exports.capture = async function() {
   log.info('capturing photo');
-  return execa('gphoto2', ['--set-config', 'capturetarget=1', '--trigger-capture']).then(result => {
-      log.info(result.stdout);
-      return result;
-  });
+  const result = await execa('gphoto2', ['--set-config', 'capturetarget=1', '--trigger-capture']);
+  log.info(result.stdout);
+  return result;
 }

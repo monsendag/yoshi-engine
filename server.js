@@ -1,9 +1,9 @@
-import * as driver from './src/driver';
-import * as camera from './src/camera';
-import * as engine from './src/engine';
+const driver = require('./src/driver');
+const camera = require('./src/camera');
+const engine = require('./src/engine');
 
-import sleep from './src/sleep';
-import log from './src/log';
+const sleep = require('./src/sleep');
+const log = require('./src/log');
 
 // so the program will not close instantly
 process.stdin.resume();

@@ -1,4 +1,4 @@
-import * as engine from '../src/engine';
+const engine = require('../src/engine');
 
 const camera = {
   setup() {

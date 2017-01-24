@@ -1,4 +1,4 @@
-import {Logger, transports} from 'winston';
+const {Logger, transports} = require('winston');
 
 const log = new Logger({
     transports: [

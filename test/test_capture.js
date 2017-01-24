@@ -1,5 +1,5 @@
-import test from 'ava';
-import {setup, capture} from '../src/camera';
+const test = require('ava');
+const {setup, capture} = require('../src/camera');
 
 
 test('capture single photo', t => {
